@@ -1,21 +1,39 @@
-#include<stdio.h>
-#include<conio.h>
+#include <stdio.h>
+#include <limits.h>
 
-long factorial(int n)  
-{  
-  if(n==0)
-  return 1; 
-  else  
-    return(n * factorial(n-1));  
-}  
-   
-void main()  
-{  
-  int number;  
-  long fact;  
-  printf("Enter a number: ");  
-  scanf("%d", &number);    
-  fact = factorial(number);  
-  printf("Factorial of %d is %ld\n", number, fact);  
-  return 0;  
-} 
+unsigned long long factorial(int n) {
+    if (n < 0) return 0;
+    
+    unsigned long long result = 1;
+    for (int i = 1; i <= n; i++) {
+        if (result > ULLONG_MAX / i) {
+            printf("Warning: Factorial of %d is too large to store in unsigned long long\n", n);
+            return 0;
+        }
+        result *= i;
+    }
+    return result;
+}
+
+int main() {
+    int number;
+    printf("Enter a non-negative integer: ");
+    
+    if (scanf("%d", &number) != 1) {
+        printf("Error: Invalid input.\n");
+        return 1;
+    }
+    
+    if (number < 0) {
+        printf("Error: Factorial is not defined for negative numbers.\n");
+        return 1;
+    }
+    
+    unsigned long long fact = factorial(number);
+    
+    if (fact != 0) {
+        printf("Factorial of %d is %llu\n", number, fact);
+    }
+    
+    return 0;
+}
