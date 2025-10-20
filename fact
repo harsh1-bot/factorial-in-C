@@ -1,21 +1,28 @@
-#include<stdio.h>
-#include<conio.h>
+#include <stdio.h>
 
-long factorial(int n)  
-{  
-  if(n==0)
-  return 1; 
-  else  
-    return(n * factorial(n-1));  
-}  
-   
-void main()  
-{  
-  int number;  
-  long fact;  
-  printf("Enter a number: ");  
-  scanf("%d", &number);    
-  fact = factorial(number);  
-  printf("Factorial of %d is %ld\n", number, fact);  
-  return 0;  
-} 
+// Function to calculate factorial using recursion
+unsigned long long factorial(int n) {
+    if (n == 0 || n == 1)
+        return 1;
+    else
+        return n * factorial(n - 1);
+}
+
+int main() {
+    int number;
+    unsigned long long fact;
+
+    printf("Enter a non-negative integer (0-20): ");
+    scanf("%d", &number);
+
+    // 👇 Input validation
+    if (number < 0 || number > 20) {
+        printf("❌ Invalid input! Please enter a number between 0 and 20.\n");
+        return 1;
+    }
+
+    fact = factorial(number);
+    printf("✅ Factorial of %d is %llu\n", number, fact);
+
+    return 0;
+}
